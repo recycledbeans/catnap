@@ -1,6 +1,6 @@
 <?php
 
-namespace CatNap;
+namespace AbiCRM\CatNap;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
