@@ -63,6 +63,7 @@ class CatNap extends Controller
 	public function update(Request $request, $id)
 	{
 		$record = $this->model->find($id);
+
 		if(! $record) {
 			return response()->json(['status' => 'NOT FOUND'], 404);
 		}
