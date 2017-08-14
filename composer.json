@@ -14,5 +14,6 @@
   },
   "autoload": {
     "psr-0": {"CatNap\\": "src/CatNap"}
-  }
+  },
+  "minimum-stability": "master"
 }
