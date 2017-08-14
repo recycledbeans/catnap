@@ -14,7 +14,8 @@
     "php": ">=5.6"
   },
   "autoload": {
-    "psr-0": {"CatNap\\": "src/"}
-  },
-  "minimum-stability": "master"
+    "psr-4": {
+      "CatNap\\": "src/"
+    }
+  }
 }
