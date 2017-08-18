@@ -1,11 +1,11 @@
 <?php
 
-namespace CatNap;
+namespace Catnap;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CatNap extends Controller
+class Catnap extends Controller
 {
 
 	protected $model = null;
