@@ -2,7 +2,6 @@
   "name": "abicrm/catnap",
   "description": "Amazingly simple restful resources package for Laravel.",
   "keywords": ["abi", "abicrm", "rest", "api", "restful"],
-  "version": "0.1.0",
   "authors" : [
     {
       "name": "Matt Watson",
@@ -11,7 +10,8 @@
     }
   ],
   "require": {
-    "php": ">=5.6"
+    "php": ">=5.6",
+    "abicrm/catnap": "dev-master"
   },
   "autoload": {
     "psr-4": {
