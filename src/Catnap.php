@@ -16,7 +16,7 @@ class Catnap extends Controller
 
 	public function __construct()
 	{
-		$this->model = ! is_subclass_of($this->model, Model::class) ? new $this->model() : $this->model;
+		$this->model = new $this->model();
 	}
 
 	/**
