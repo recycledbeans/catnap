@@ -97,7 +97,7 @@ class Catnap extends Controller
 			return response()->json(['status' => 'NOT FOUND'], 404);
 		}
 
-		return $record->update($this->request->all())
+		return $record->update($request->all())
 			? response()->json(['status' => 'OK'])
 			: response()->json(['status' => 'FAIL']);
 	}
