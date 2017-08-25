@@ -3,16 +3,20 @@
 namespace Catnap;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Validator;
 
 class Catnap extends Controller
 {
 
 	protected $model = null;
+	protected $form_request = null;
 
 	public function __construct()
 	{
-		$this->model = new $this->model();
+		$this->model = ! is_subclass_of($this->model, Model::class) ? new $this->model() : $this->model;
 	}
 
 	/**
@@ -22,17 +26,29 @@ class Catnap extends Controller
 	 */
 	public function index()
 	{
+		$validation = (new Validation)->validate(request(), $this->form_request);
+
+		if( is_a($validation, JsonResponse::class) ) {
+			return $validation;
+		}
+
 		return $this->model->paginate();
 	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
+	 * @param Request $request
+	 * @return mixed
 	 */
 	public function store(Request $request)
 	{
+		$validation = (new Validation)->validate($request, $this->form_request);
+
+		if( is_a($validation, JsonResponse::class) ) {
+			return $validation;
+		}
+
 		return $this->model->create($request->all());
 	}
 
@@ -44,10 +60,16 @@ class Catnap extends Controller
 	 */
 	public function show($id)
 	{
+		$validation = (new Validation)->validate(request(), $this->form_request);
+
+		if( is_a($validation, JsonResponse::class) ) {
+			return $validation;
+		}
+
 		$record = $this->model->find($id);
 
 		if ( ! $record ) {
-			return response()->json(['status' => 'NOT FOUND'], 404);
+			return response()->json(['status' => 'NOT_FOUND'], 404);
 		}
 
 		return $record;
@@ -62,13 +84,20 @@ class Catnap extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
+
+		$validation = (new Validation)->validate($request, $this->form_request);
+
+		if( is_a($validation, JsonResponse::class) ) {
+			return $validation;
+		}
+
 		$record = $this->model->find($id);
 
 		if(! $record) {
 			return response()->json(['status' => 'NOT FOUND'], 404);
 		}
 
-		return $record->update($request->all())
+		return $record->update($this->request->all())
 			? response()->json(['status' => 'OK'])
 			: response()->json(['status' => 'FAIL']);
 	}
@@ -81,6 +110,13 @@ class Catnap extends Controller
 	 */
 	public function destroy($id)
 	{
+
+		$validation = (new Validation)->validate(request(), $this->form_request);
+
+		if( is_a($validation, JsonResponse::class) ) {
+			return $validation;
+		}
+
 		$record = $this->model->find($id);
 
 		if ( ! $record ) {
