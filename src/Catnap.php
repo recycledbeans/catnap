@@ -8,10 +8,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
 
-class Catnap extends Controller
+Trait Catnap
 {
 
-	protected $model = null;
 	protected $form_request = null;
 
 	public function __construct()
